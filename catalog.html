@@ -3,49 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JVL Clothing - Catalog</title>
+  <title>JVL Catalog Page</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
       margin: 0;
-      background-color: black;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #333;
       color: white;
-      font-family: 'Arial', sans-serif;
+      padding: 20px;
       text-align: center;
     }
 
-    /* Navigation Menu */
-    .nav {
-      position: absolute;
-      top: 5%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-
-    .nav a {
-      display: inline-block;
-      font-size: 20px;
-      color: white;
-      text-decoration: none;
-      margin: 15px 20px;
-    }
-
-    /* Main Content */
     .catalog {
-      margin-top: 150px;
+      display: flex;
+      justify-content: space-around;
+      margin: 20px;
     }
 
-    .item {
-      display: inline-block;
-      margin: 0 30px;
+    .product {
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .item img {
+    .product img {
       width: 200px;
+      height: 200px;
+      object-fit: contain;
     }
 
-    .item p {
-      margin-top: 10px;
+    .product h2 {
+      color: black;
+    }
+
+    .product p {
+      color: green;
+    }
+
+    .add-to-cart {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .add-to-cart:hover {
+      background-color: gray;
     }
 
     /* Cart Icon */
@@ -53,8 +65,8 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      background-color: white;
-      color: black;
+      background-color: black;
+      color: white;
       padding: 10px;
       border-radius: 50%;
       cursor: pointer;
@@ -70,8 +82,8 @@
       top: 0;
       width: 300px;
       height: 100vh;
-      background-color: white;
-      color: black;
+      background-color: black;
+      color: white;
       box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
       padding: 20px;
       z-index: 3;
@@ -79,6 +91,7 @@
 
     .cart-panel h2 {
       margin-top: 0;
+      color: white;
     }
 
     /* Close Cart Button */
@@ -97,8 +110,8 @@
     .checkout {
       margin-top: 20px;
       padding: 10px 20px;
-      background-color: black;
-      color: white;
+      background-color: white;
+      color: black;
       cursor: pointer;
       text-decoration: none;
     }
@@ -109,98 +122,80 @@
   </style>
 </head>
 <body>
-  <!-- Navigation Menu -->
-  <div class="nav">
-    <a href="index.html">HOME</a>
-    <a href="catalog.html">CATALOG</a>
-    <a href="#contact">CONTACT</a>
+
+  <div class="header">
+    <h1>Catalog</h1>
   </div>
 
-  <!-- Catalog Items -->
+  <!-- Catalog Section -->
   <div class="catalog">
-    <div class="item">
-      <img src="images/jvl-beanie.png" alt="JVL Beanie">
-      <p>JVL Beanie - $134 <br> 
-        <button onclick="addToCart('JVL Beanie', 134)">Add to Cart</button>
-      </p>
+    <div class="product">
+      <img src="https://example.com/beanie.png" alt="JVL Beanie">
+      <h2>JVL Beanie</h2>
+      <p>$134.00</p>
+      <button class="add-to-cart" data-name="JVL Beanie" data-price="134.00">Add to Cart</button>
     </div>
-    <div class="item">
-      <img src="images/jvl-hoodie.png" alt="JVL Hoodie">
-      <p>JVL Hoodie - $250 <br> 
-        <button onclick="addToCart('JVL Hoodie', 250)">Add to Cart</button>
-      </p>
+    <div class="product">
+      <img src="https://example.com/hoodie.png" alt="JVL Hoodie">
+      <h2>JVL Hoodie</h2>
+      <p>$250.00</p>
+      <button class="add-to-cart" data-name="JVL Hoodie" data-price="250.00">Add to Cart</button>
     </div>
-    <div class="item">
-      <img src="images/jvl-tee.png" alt="JVL Tee">
-      <p>JVL Tee - $280 <br> 
-        <button onclick="addToCart('JVL Tee', 280)">Add to Cart</button>
-      </p>
+    <div class="product">
+      <img src="https://example.com/tee.png" alt="JVL Tee">
+      <h2>JVL Tee</h2>
+      <p>$280.00</p>
+      <button class="add-to-cart" data-name="JVL Tee" data-price="280.00">Add to Cart</button>
     </div>
   </div>
 
-  <!-- Floating Cart Icon -->
-  <div class="cart-icon" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</div>
+  <!-- Cart Icon -->
+  <div class="cart-icon" onclick="toggleCart()">🛒 (<span id="cart-count">0</span>)</div>
 
   <!-- Cart Panel -->
   <div class="cart-panel" id="cart-panel">
-    <button class="close-cart" onclick="toggleCart()">X</button>
     <h2>Your Cart</h2>
-    <p id="cart-items">No items in cart</p>
-    <p id="total">Total: $0</p>
-    <a id="checkout-link" class="checkout" href="#">Checkout with PayPal</a>
+    <div id="cart-items"></div>
+    <button class="close-cart" onclick="toggleCart()">Close</button>
+    <a href="https://www.paypal.com" target="_blank" class="checkout">Checkout with PayPal</a>
   </div>
 
   <script>
-    // Cart Data
     let cart = [];
-    let totalAmount = 0;
+    
+    // Add to cart functionality
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', () => {
+        const name = button.getAttribute('data-name');
+        const price = button.getAttribute('data-price');
 
-    // Add items to cart
-    function addToCart(product, price) {
-      cart.push({ product, price });
-      updateCart();
-    }
+        // Add product to cart
+        cart.push({ name, price });
+        updateCart();
+      });
+    });
 
-    // Update the cart display
+    // Update cart display
     function updateCart() {
-      const cartItems = document.getElementById("cart-items");
-      const total = document.getElementById("total");
-      const cartCount = document.getElementById("cart-count");
-      const checkoutLink = document.getElementById("checkout-link");
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
 
-      // List items in cart
-      let itemsText = "";
-      cart.forEach(item => {
-        itemsText += item.product + " - $" + item.price + "<br>";
-      });
+      cartCount.textContent = cart.length;
+      cartItems.innerHTML = '';
 
-      cartItems.innerHTML = itemsText || "No items in cart";
-
-      // Update total price
-      totalAmount = cart.reduce((acc, item) => acc + item.price, 0);
-      total.innerHTML = "Total: $" + totalAmount;
-
-      // Update cart count
-      cartCount.innerHTML = cart.length;
-
-      // Update PayPal checkout link
-      const paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_cart&business=jaden@jvlshop.com&upload=1&currency_code=USD`;
-      let itemsQueryString = "";
-      
       cart.forEach((item, index) => {
-        itemsQueryString += `&item_name_${index + 1}=${item.product}&amount_${index + 1}=${item.price}`;
+        const itemElement = document.createElement('div');
+        itemElement.textContent = `${item.name} - $${item.price}`;
+        cartItems.appendChild(itemElement);
       });
-
-      checkoutLink.href = paypalURL + itemsQueryString + `&amount=${totalAmount}`;
     }
 
-    // Toggle Cart Panel Visibility
+    // Toggle cart visibility
     function toggleCart() {
-      const cartPanel = document.getElementById("cart-panel");
-      cartPanel.style.display = cartPanel.style.display === "block" ? "none" : "block";
+      const cartPanel = document.getElementById('cart-panel');
+      cartPanel.style.display = cartPanel.style.display === 'block' ? 'none' : 'block';
     }
   </script>
+
 </body>
 </html>
-
-
