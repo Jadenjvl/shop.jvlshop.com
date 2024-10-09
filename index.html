@@ -1,107 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JVL Clothing :)</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: black;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JVL Clothing - Home</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
 
-    /* Navigation Menu */
-    .nav {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-    }
+        /* Navigation Menu */
+        .nav {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
 
-    .nav a {
-      display: block;
-      font-size: 24px;
-      color: white;
-      text-decoration: none;
-      margin: 15px 0;
-    }
+        .nav a {
+            display: inline-block;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            margin: 15px 20px;
+        }
 
-    /* Logo Section */
-    .logo {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
+        /* Welcome Section */
+        .welcome {
+            margin-top: 150px;
+        }
 
-    .logo img {
-      max-width: 100px;
-    }
+        /* Call to Action Button */
+        .cta-button {
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            margin-top: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+        }
 
-    /* Background Text */
-    .background-text {
-      font-size: 150px;
-      letter-spacing: 5px;
-      color: white;
-      font-family: 'YourFontHere', sans-serif; /* Replace with the font used */
-    }
+        .cta-button:hover {
+            background-color: gray;
+            color: white;
+        }
 
-    /* Footer with social media icons */
-    .footer {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .footer img {
-      width: 40px;
-      margin: 0 15px;
-    }
-
-    /* Timestamp */
-    .timestamp {
-      position: absolute;
-      top: 5%;
-      right: 5%;
-      font-size: 14px;
-    }
-  </style>
+        /* Footer */
+        footer {
+            margin-top: 100px;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+    </style>
 </head>
 <body>
-  <!-- Timestamp -->
-  
-  
-  <div class="timestamp">10/8/2024 10:52 PM</div>
+    <!-- Navigation Menu -->
+    <div class="nav">
+        <a href="index.html">HOME</a>
+        <a href="catalog.html">CATALOG</a>
+        <a href="#contact">CONTACT</a>
+    </div>
 
-  <!-- Logo -->
-  <div class="logo">
-    <img src="path-to-your-logo.png" alt="JVL Logo">
-  </div>
+    <!-- Welcome Section -->
+    <div class="welcome">
+        <h1>Welcome to My Shop</h1>
+        <p>Explore our latest collection </p>
+        <a href="catalog.html" class="cta-button">Shop Now</a>
+    </div>
 
-  <!-- Navigation Menu -->
-  <div class="nav">
-    <a href="#home">HOME</a>
-    <a href="#catalog">CATALOG</a>
-    <a href="#contact">CONTACT</a>
-  </div>
-
-  <!-- Background Text -->
-  <div class="background-text">JVL</div>
-
-  <!-- Footer with social icons -->
-  <div class="footer">
-    <a href="https://www.instagram.com">
-      <img src="path-to-instagram-icon.png" alt="Instagram">
-    </a>
-    <a href="https://www.tiktok.com">
-      <img src="path-to-tiktok-icon.png" alt="TikTok">
-    </a>
-  </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 JVL Clothing. All rights reserved.</p>
+    </footer>
 </body>
 </html>
+
