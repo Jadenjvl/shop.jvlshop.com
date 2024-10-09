@@ -47,6 +47,28 @@
     .item p {
       margin-top: 10px;
     }
+
+    /* Cart */
+    .cart {
+      margin-top: 50px;
+    }
+
+    .cart p {
+      font-size: 20px;
+    }
+
+    .checkout {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: white;
+      color: black;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .checkout:hover {
+      background-color: gray;
+    }
   </style>
 </head>
 <body>
@@ -60,17 +82,73 @@
   <!-- Catalog Items -->
   <div class="catalog">
     <div class="item">
-      <img src="images/skitzo-beanie.png" alt="SKITZO Beanie">
-      <p>SKITZO Beanie</p>
+      <img src="images/jvl-beanie.png" alt="JVL Beanie">
+      <p>JVL Beanie - $134 <br> 
+        <button onclick="addToCart('JVL Beanie', 134)">Add to Cart</button>
+      </p>
     </div>
     <div class="item">
-      <img src="images/skitzo-hoodie.png" alt="SKITZO Hoodie">
-      <p>SKITZO Hoodie</p>
+      <img src="images/jvl-hoodie.png" alt="JVL Hoodie">
+      <p>JVL Hoodie - $250 <br> 
+        <button onclick="addToCart('JVL Hoodie', 250)">Add to Cart</button>
+      </p>
     </div>
     <div class="item">
-      <img src="images/skitzo-tee.png" alt="SKITZO Tee">
-      <p>SKITZO Tee <br> Dhs. 150.00 AED</p>
+      <img src="images/jvl-tee.png" alt="JVL Tee">
+      <p>JVL Tee - $280 <br> 
+        <button onclick="addToCart('JVL Tee', 280)">Add to Cart</button>
+      </p>
     </div>
   </div>
+
+  <!-- Cart Section -->
+  <div class="cart" id="cart">
+    <h2>Your Cart</h2>
+    <p id="cart-items">No items in cart</p>
+    <p id="total">Total: $0</p>
+    <a id="checkout-link" class="checkout" href="#">Checkout with PayPal</a>
+  </div>
+
+  <script>
+    // Cart Data
+    let cart = [];
+    let totalAmount = 0;
+
+    // Add items to cart
+    function addToCart(product, price) {
+      cart.push({ product, price });
+      updateCart();
+    }
+
+    // Update the cart display
+    function updateCart() {
+      const cartItems = document.getElementById("cart-items");
+      const total = document.getElementById("total");
+      const checkoutLink = document.getElementById("checkout-link");
+
+      // List items in cart
+      let itemsText = "";
+      cart.forEach(item => {
+        itemsText += item.product + " - $" + item.price + "<br>";
+      });
+
+      cartItems.innerHTML = itemsText || "No items in cart";
+
+      // Update total price
+      totalAmount = cart.reduce((acc, item) => acc + item.price, 0);
+      total.innerHTML = "Total: $" + totalAmount;
+
+      // Update PayPal checkout link
+      const paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_cart&business=YOUR_PAYPAL_EMAIL&upload=1&currency_code=USD`;
+      let itemsQueryString = "";
+      
+      cart.forEach((item, index) => {
+        itemsQueryString += `&item_name_${index + 1}=${item.product}&amount_${index + 1}=${item.price}`;
+      });
+
+      checkoutLink.href = paypalURL + itemsQueryString + `&amount=${totalAmount}`;
+    }
+  </script>
 </body>
 </html>
+
