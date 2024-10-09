@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JVL Clothing - Catalog</title>
+  <title>JVL Clothing :)</title>
   <style>
     body {
       margin: 0;
@@ -16,189 +16,90 @@
     /* Navigation Menu */
     .nav {
       position: absolute;
-      top: 5%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .nav a {
+      display: block;
+      font-size: 24px;
+      color: white;
+      text-decoration: none;
+      margin: 15px 0;
+    }
+
+    /* Logo Section */
+    .logo {
+      position: absolute;
+      top: 10%;
       left: 50%;
       transform: translateX(-50%);
       z-index: 1;
     }
 
-    .nav a {
-      display: inline-block;
-      font-size: 20px;
+    .logo img {
+      max-width: 100px;
+    }
+
+    /* Background Text */
+    .background-text {
+      font-size: 150px;
+      letter-spacing: 5px;
       color: white;
-      text-decoration: none;
-      margin: 15px 20px;
+      font-family: 'YourFontHere', sans-serif; /* Replace with the font used */
     }
 
-    /* Main Content */
-    .catalog {
-      margin-top: 150px;
-    }
-
-    .item {
-      display: inline-block;
-      margin: 0 30px;
-    }
-
-    .item img {
-      width: 200px;
-    }
-
-    .item p {
-      margin-top: 10px;
-    }
-
-    /* Cart Icon */
-    .cart-icon {
+    /* Footer with social media icons */
+    .footer {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: white;
-      color: black;
-      padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      z-index: 2;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
-    /* Cart Panel (hidden initially) */
-    .cart-panel {
-      display: none;
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 300px;
-      height: 100vh;
-      background-color: white;
-      color: black;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      z-index: 3;
+    .footer img {
+      width: 40px;
+      margin: 0 15px;
     }
 
-    .cart-panel h2 {
-      margin-top: 0;
-    }
-
-    /* Close Cart Button */
-    .close-cart {
+    /* Timestamp */
+    .timestamp {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: red;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Checkout Button */
-    .checkout-btn {
-      padding: 10px 20px;
-      background-color: black;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: 20px;
-    }
-
-    .checkout-btn:hover {
-      background-color: gray;
+      top: 5%;
+      right: 5%;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
+  <!-- Timestamp -->
+  <div class="timestamp">10/8/2024 10:52 PM</div>
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="path-to-your-logo.png" alt="JVL Logo">
+  </div>
+
   <!-- Navigation Menu -->
   <div class="nav">
-    <a href="index.html">HOME</a>
-    <a href="catalog.html">CATALOG</a>
+    <a href="#home">HOME</a>
+    <a href="#catalog">CATALOG</a>
     <a href="#contact">CONTACT</a>
   </div>
 
-  <!-- Catalog Items -->
-  <div class="catalog">
-    <div class="item">
-      <img src="images/jvl-beanie.png" alt="JVL Beanie">
-      <p>JVL Beanie - $134 <br> 
-        <button onclick="addToCart('JVL Beanie', 134)">Add to Cart</button>
-      </p>
-    </div>
-    <div class="item">
-      <img src="images/jvl-hoodie.png" alt="JVL Hoodie">
-      <p>JVL Hoodie - $250 <br> 
-        <button onclick="addToCart('JVL Hoodie', 250)">Add to Cart</button>
-      </p>
-    </div>
-    <div class="item">
-      <img src="images/jvl-tee.png" alt="JVL Tee">
-      <p>JVL Tee - $280 <br> 
-        <button onclick="addToCart('JVL Tee', 280)">Add to Cart</button>
-      </p>
-    </div>
+  <!-- Background Text -->
+  <div class="background-text">JVL</div>
+
+  <!-- Footer with social icons -->
+  <div class="footer">
+    <a href="https://www.instagram.com">
+      <img src="path-to-instagram-icon.png" alt="Instagram">
+    </a>
+    <a href="https://www.tiktok.com">
+      <img src="path-to-tiktok-icon.png" alt="TikTok">
+    </a>
   </div>
-
-  <!-- Floating Cart Icon -->
-  <div class="cart-icon" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</div>
-
-  <!-- Cart Panel -->
-  <div class="cart-panel" id="cart-panel">
-    <button class="close-cart" onclick="toggleCart()">X</button>
-    <h2>Your Cart</h2>
-    <p id="cart-items">No items in cart</p>
-    <p id="total">Total: $0</p>
-    
-    <!-- Checkout Button -->
-    <button class="checkout-btn" onclick="checkout()">Checkout</button>
-  </div>
-
-  <script>
-    // Cart Data
-    let cart = [];
-    let totalAmount = 0;
-
-    // Add items to cart
-    function addToCart(product, price) {
-      cart.push({ product, price });
-      updateCart();
-    }
-
-    // Update the cart display
-    function updateCart() {
-      const cartItems = document.getElementById("cart-items");
-      const total = document.getElementById("total");
-      const cartCount = document.getElementById("cart-count");
-
-      // List items in cart
-      let itemsText = "";
-      cart.forEach(item => {
-        itemsText += item.product + " - $" + item.price + "<br>";
-      });
-
-      cartItems.innerHTML = itemsText || "No items in cart";
-
-      // Update total price
-      totalAmount = cart.reduce((acc, item) => acc + item.price, 0);
-      total.innerHTML = "Total: $" + totalAmount;
-
-      // Update cart count
-      cartCount.innerHTML = cart.length;
-    }
-
-    // Toggle Cart Panel Visibility
-    function toggleCart() {
-      const cartPanel = document.getElementById("cart-panel");
-      cartPanel.style.display = cartPanel.style.display === "block" ? "none" : "block";
-    }
-
-    // Checkout function with alert and redirect
-    function checkout() {
-      const message = "Please make sure to include your shipping address, the products you bought, and confirm that the total amount is correct. We will refund you if it's not the right amount.";
-      alert(message);
-      window.location.href = "https://paypal.me/JW094?country.x=CA&locale.x=en_US";
-    }
-  </script>
 </body>
 </html>
-
-
