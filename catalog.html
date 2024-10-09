@@ -48,20 +48,57 @@
       margin-top: 10px;
     }
 
-    /* Cart */
-    .cart {
-      margin-top: 50px;
+    /* Cart Icon */
+    .cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: black;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 2;
     }
 
-    .cart p {
-      font-size: 20px;
+    /* Cart Panel (hidden initially) */
+    .cart-panel {
+      display: none;
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100vh;
+      background-color: white;
+      color: black;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      z-index: 3;
     }
 
+    .cart-panel h2 {
+      margin-top: 0;
+    }
+
+    /* Close Cart Button */
+    .close-cart {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: red;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Checkout Button */
     .checkout {
       margin-top: 20px;
       padding: 10px 20px;
-      background-color: white;
-      color: black;
+      background-color: black;
+      color: white;
       cursor: pointer;
       text-decoration: none;
     }
@@ -101,8 +138,12 @@
     </div>
   </div>
 
-  <!-- Cart Section -->
-  <div class="cart" id="cart">
+  <!-- Floating Cart Icon -->
+  <div class="cart-icon" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</div>
+
+  <!-- Cart Panel -->
+  <div class="cart-panel" id="cart-panel">
+    <button class="close-cart" onclick="toggleCart()">X</button>
     <h2>Your Cart</h2>
     <p id="cart-items">No items in cart</p>
     <p id="total">Total: $0</p>
@@ -124,6 +165,7 @@
     function updateCart() {
       const cartItems = document.getElementById("cart-items");
       const total = document.getElementById("total");
+      const cartCount = document.getElementById("cart-count");
       const checkoutLink = document.getElementById("checkout-link");
 
       // List items in cart
@@ -138,6 +180,9 @@
       totalAmount = cart.reduce((acc, item) => acc + item.price, 0);
       total.innerHTML = "Total: $" + totalAmount;
 
+      // Update cart count
+      cartCount.innerHTML = cart.length;
+
       // Update PayPal checkout link
       const paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_cart&business=YOUR_PAYPAL_EMAIL&upload=1&currency_code=USD`;
       let itemsQueryString = "";
@@ -148,7 +193,14 @@
 
       checkoutLink.href = paypalURL + itemsQueryString + `&amount=${totalAmount}`;
     }
+
+    // Toggle Cart Panel Visibility
+    function toggleCart() {
+      const cartPanel = document.getElementById("cart-panel");
+      cartPanel.style.display = cartPanel.style.display === "block" ? "none" : "block";
+    }
   </script>
 </body>
 </html>
+
 
