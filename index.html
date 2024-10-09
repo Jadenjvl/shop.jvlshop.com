@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JVL Clothing</title>
+  <title>JVL Clothing - Catalog</title>
   <style>
     body {
       margin: 0;
@@ -16,72 +16,51 @@
     /* Navigation Menu */
     .nav {
       position: absolute;
-      top: 50%;
+      top: 5%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       z-index: 1;
     }
 
     .nav a {
-      display: block;
-      font-size: 24px;
+      display: inline-block;
+      font-size: 20px;
       color: white;
       text-decoration: none;
-      margin: 15px 0;
+      margin: 15px 20px;
     }
 
-    /* Logo Section */
-    .logo {
+    /* Live Date and Time */
+    .live-time {
       position: absolute;
       top: 10%;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 1;
-    }
-
-    .logo img {
-      max-width: 100px;
-    }
-
-    /* Background Text */
-    .background-text {
-      font-size: 150px;
-      letter-spacing: 5px;
+      font-size: 18px;
+      font-weight: bold;
       color: white;
-      font-family: 'YourFontHere', sans-serif; /* Replace with the font used */
     }
 
-    /* Footer with social media icons */
-    .footer {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Main Content */
+    .catalog {
+      margin-top: 150px;
     }
 
-    .footer img {
-      width: 40px;
-      margin: 0 15px;
+    .item {
+      display: inline-block;
+      margin: 0 30px;
     }
 
-    /* Timestamp */
-    .timestamp {
-      position: absolute;
-      top: 5%;
-      right: 5%;
-      font-size: 14px;
+    .item img {
+      width: 200px;
+    }
+
+    .item p {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <!-- Timestamp -->
-  <div class="timestamp">10/8/2024 10:52 PM</div>
-
-  <!-- Logo -->
-  <div class="logo">
-    <img src="path-to-your-logo.png" alt="JVL Logo">
-  </div>
-
   <!-- Navigation Menu -->
   <div class="nav">
     <a href="#home">HOME</a>
@@ -89,17 +68,38 @@
     <a href="#contact">CONTACT</a>
   </div>
 
-  <!-- Background Text -->
-  <div class="background-text">JVL</div>
+  <!-- Live Time and Date -->
+  <div class="live-time" id="liveTime"></div>
 
-  <!-- Footer with social icons -->
-  <div class="footer">
-    <a href="https://www.instagram.com">
-      <img src="path-to-instagram-icon.png" alt="Instagram">
-    </a>
-    <a href="https://www.tiktok.com">
-      <img src="path-to-tiktok-icon.png" alt="TikTok">
-    </a>
+  <!-- Catalog Items -->
+  <div class="catalog">
+    <div class="item">
+      <img src="path-to-your-image/skitzo-beanie.png" alt="SKITZO Beanie">
+      <p>SKITZO Beanie</p>
+    </div>
+    <div class="item">
+      <img src="path-to-your-image/skitzo-hoodie.png" alt="SKITZO Hoodie">
+      <p>SKITZO Hoodie</p>
+    </div>
+    <div class="item">
+      <img src="path-to-your-image/skitzo-tee.png" alt="SKITZO Tee">
+      <p>SKITZO Tee <br> Dhs. 150.00 AED</p>
+    </div>
   </div>
+
+  <script>
+    // Function to display live time and date
+    function updateTime() {
+      var now = new Date();
+      var timeString = now.toLocaleTimeString();
+      var dateString = now.toLocaleDateString();
+
+      document.getElementById("liveTime").innerHTML = dateString + " " + timeString;
+    }
+
+    // Update the time every second
+    setInterval(updateTime, 1000);
+  </script>
 </body>
 </html>
+
